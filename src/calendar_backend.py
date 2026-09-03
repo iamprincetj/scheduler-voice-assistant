@@ -8,6 +8,9 @@ from .nlu_extractor import SchedulingIntent
 
 
 class CalendarBackend(ABC):
+
+    def __init__(self, storage_path: str):
+        self.storage_path = Path(storage_path)
     @abstractmethod
     def book_event(self, intent: SchedulingIntent) -> dict:
         raise NotImplementedError
@@ -20,7 +23,7 @@ class LocalJSONCalendar(CalendarBackend):
     """
 
     def __init__(self, storage_path: str= "data/events.json"):
-        self.storage_path = Path(storage_path)
+        super().__init__(storage_path=storage_path)
         self.storage_path.parent.mkdir(exist_ok=True)
         self.storage_path.touch(exist_ok=True)
 

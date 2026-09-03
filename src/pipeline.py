@@ -13,6 +13,8 @@ class SchedulerPipeline:
         self.extractor = extractor
         self.calendar = calendar
 
+        
+
 
     def run(self, audio_path: str) -> dict:
         transcript = self.stt.transcribe(audio_path)
