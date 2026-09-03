@@ -52,5 +52,29 @@
     "when": "2026-09-03T15:00:00",
     "raw_transcript": "schedule a meeting with Justin tomorrow at 3pm today. No, I'm meant tomorrow.",
     "booked_at": "2026-09-02T22:35:16.407378"
+  },
+  {
+    "person": "Justin",
+    "when": "2026-09-03T15:00:00",
+    "raw_transcript": "Schedule or meeting with Justin at 3pm tomorrow.",
+    "booked_at": "2026-09-02T23:15:17.728698"
+  },
+  {
+    "person": "Justin",
+    "when": "2027-09-03T19:00:00",
+    "raw_transcript": "Set up a meeting with Justin, Tomorrow at 7pm. No, I mean, next to Mold.",
+    "booked_at": "2026-09-02T23:26:48.953107"
+  },
+  {
+    "person": "Daniel",
+    "when": "2027-09-03T19:00:00",
+    "raw_transcript": "Set up a meeting with Daniel tomorrow by 4pm. No, actually it should be next week when is the at 7pm.",
+    "booked_at": "2026-09-02T23:28:08.956394"
+  },
+  {
+    "person": "Daniel",
+    "when": "2026-09-11T18:00:00",
+    "raw_transcript": "Set up a meeting with Daniel tomorrow by 4pm. No actually should be next week Friday by 6pm.",
+    "booked_at": "2026-09-02T23:29:03.752366"
   }
 ]
