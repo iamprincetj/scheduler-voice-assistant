@@ -1,80 +1,10 @@
 [
   {
-    "person": null,
-    "when": "2026-09-02T21:58:56.366474",
-    "raw_transcript": "You have the exact same number of hours today as you did when you were 8 years old. So why does this year feel like it's disappearing twice as fast?",
-    "booked_at": "2026-09-02T21:58:56.376357"
-  },
-  {
-    "person": "Sarah",
-    "when": "2026-09-02T15:00:00",
-    "raw_transcript": "Schedule a meeting with Sarah tomorrow at 3pm today.",
-    "booked_at": "2026-09-02T22:04:31.496683"
-  },
-  {
-    "person": "Sarah",
-    "when": "2026-09-03T15:00:00",
-    "raw_transcript": "Chajula meeting with Sarah tomorrow at 3pm tomorrow.",
-    "booked_at": "2026-09-02T22:05:46.934270"
-  },
-  {
-    "person": "Sir",
-    "when": "2026-09-02T15:00:00",
-    "raw_transcript": "Schedule a meeting with Sir tomorrow at 3pm today. No I meant tomorrow.",
-    "booked_at": "2026-09-02T22:09:36.199370"
-  },
-  {
-    "person": "Sir",
-    "when": "2026-09-02T15:00:00",
-    "raw_transcript": "Schedule a meeting with Sir tomorrow at 3pm today. No I meant tomorrow.",
-    "booked_at": "2026-09-02T22:20:52.068352"
-  },
-  {
-    "person": "Sir",
-    "when": "2026-09-02T15:00:00",
-    "raw_transcript": "Schedule a meeting with Sir tomorrow at 3pm today. No I meant tomorrow.",
-    "booked_at": "2026-09-02T22:21:54.642721"
-  },
-  {
-    "person": "Justin",
-    "when": "2026-09-03T16:00:00",
-    "raw_transcript": "Chidula meeting with Justin tomorrow at 3pm today. No I meant 4pm tomorrow.",
-    "booked_at": "2026-09-02T22:23:42.859967"
-  },
-  {
-    "person": "Justin",
-    "when": "2026-09-03T16:00:00",
-    "raw_transcript": "Chidula meeting with Justin tomorrow at 3pm today. No I meant 4pm tomorrow.",
-    "booked_at": "2026-09-02T22:33:50.718923"
-  },
-  {
-    "person": "Justin",
-    "when": "2026-09-03T15:00:00",
-    "raw_transcript": "schedule a meeting with Justin tomorrow at 3pm today. No, I'm meant tomorrow.",
-    "booked_at": "2026-09-02T22:35:16.407378"
-  },
-  {
-    "person": "Justin",
-    "when": "2026-09-03T15:00:00",
-    "raw_transcript": "Schedule or meeting with Justin at 3pm tomorrow.",
-    "booked_at": "2026-09-02T23:15:17.728698"
-  },
-  {
-    "person": "Justin",
-    "when": "2027-09-03T19:00:00",
-    "raw_transcript": "Set up a meeting with Justin, Tomorrow at 7pm. No, I mean, next to Mold.",
-    "booked_at": "2026-09-02T23:26:48.953107"
-  },
-  {
-    "person": "Daniel",
-    "when": "2027-09-03T19:00:00",
-    "raw_transcript": "Set up a meeting with Daniel tomorrow by 4pm. No, actually it should be next week when is the at 7pm.",
-    "booked_at": "2026-09-02T23:28:08.956394"
-  },
-  {
-    "person": "Daniel",
-    "when": "2026-09-11T18:00:00",
-    "raw_transcript": "Set up a meeting with Daniel tomorrow by 4pm. No actually should be next week Friday by 6pm.",
-    "booked_at": "2026-09-02T23:29:03.752366"
+    "id": "a69c9e85-6979-4209-8399-4a8899f9ed41",
+    "person": "Vinci",
+    "when": "2026-09-04T19:18:00",
+    "raw_transcript": "Set up a meeting with Vinci for 7.14 pm today.",
+    "booked_at": "2026-09-04T19:13:20.015825",
+    "reminded": false
   }
 ]
