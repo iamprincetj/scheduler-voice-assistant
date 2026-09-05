@@ -47,16 +47,11 @@ class IntentExtractor:
         cleaned = self._clean_for_dateparser(normalized)
         action = "schedule" if "schedule" in transcript.lower() else "unknown"
 
-        print("RAW:       ", transcript)
-        print("NORMALIZED:", normalized)
-        print("CLEANED:", cleaned)
 
         person_match = self.PERSON_PATTERN.search(transcript)
         person = person_match.group(1) if person_match else None
 
         matches = search_dates(cleaned, settings={"PREFER_DATES_FROM": "future"}) or []
-
-        print("MATCHES", matches)
 
         candidates = [(text, dt.isoformat()) for text, dt in matches]
 
@@ -111,8 +106,6 @@ class IntentExtractor:
         if not matches:
             return None, None
 
-        print("RESOLVING:", matches)
-
         with_time = [
             m
             for m in matches
@@ -130,9 +123,6 @@ class IntentExtractor:
         if with_time:
             time_text, time_dt = with_time[-1]
 
-            print("DATE MATCH:", date_text, date_dt)
-            print("TIME MATCH:", time_text, time_dt)
-
             combined = datetime.combine(
                 date_component,
                 time_dt.time(),
@@ -143,10 +133,5 @@ class IntentExtractor:
         else:
             combined = date_dt
             chosen_text = date_text
-
-        print("CHOSEN:", chosen_text, combined)
-
-        print()
-        print()
 
         return chosen_text, combined

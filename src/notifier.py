@@ -28,7 +28,7 @@ class GoogleCalendarNotifier(Notifier):
     """
 
     def notify(self, event: Event):
-        print("Came here")
+        
         created_event = create_calendar_event(event.person, event.when)
-        print("And it finshed")
+        
         return created_event
