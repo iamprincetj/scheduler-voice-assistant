@@ -1,4 +1,5 @@
 from __future__ import print_function
+from datetime import datetime, timedelta
 
 import os.path
 from pathlib import Path
@@ -9,6 +10,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
+
 
 def get_calendar_service():
     creds = None
@@ -38,7 +40,6 @@ def get_calendar_service():
         # Save the credentials for the next run.
         token_path.write_text(creds.to_json())
 
-
     service = build(
         "calendar",
         "v3",
@@ -48,18 +49,14 @@ def get_calendar_service():
     return service
 
 
-
-from datetime import datetime, timedelta
-
-def create_calendar_event(person: str, start_time: str | datetime):
-    print("who")
+def create_calendar_event(person: str, start_time: str):
 
     service = get_calendar_service()
+    start_time = datetime.fromisoformat(
+        start_time)
 
-    print("HERE")
+    end_time = start_time + timedelta(minutes=30)
 
-    end_time = datetime(start_time) +  timedelta(minutes=30)
-    print("There", end_time)
     event = {
         "summary": f"Meeting with {person}",
         "description": "Created by Voice Scheduler",
@@ -81,8 +78,6 @@ def create_calendar_event(person: str, start_time: str | datetime):
             ],
         },
     }
-
-    print(event)
 
     created_event = service.events().insert(
         calendarId="primary",
