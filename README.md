@@ -2,6 +2,8 @@
 
 A voice assistant for scheduling your daily life and work.
 
+Turn a thought into a plan, before it slips away.
+
 # PIPELINE
 
 ```
