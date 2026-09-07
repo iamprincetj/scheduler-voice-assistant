@@ -1,11 +1,10 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Optional, List,Tuple
+from typing import Optional, List, Tuple
 import re
 from dateparser.search import search_dates
 
 from src.models.scheduling_intent import SchedulingIntent
-
 
 
 class IntentExtractor:
@@ -28,30 +27,29 @@ class IntentExtractor:
         re.IGNORECASE,
     )
 
-
     COMMAND_WORD_PATTERN = re.compile(
-    r"\b(?:set|schedule|book|create|make)\b",
-    re.IGNORECASE,
+        r"\b(?:set|schedule|book|create|make)\b",
+        re.IGNORECASE,
     )
 
     # Whisper may produce compact times: # 530 pm -> 5:30 pm # 544 pm -> 5:44 pm # 1655 -> 16:55 # # We only normalize these when the surrounding context makes # them look like a clock time.
-    COMPACT_12H_TIME_PATTERN = re.compile( r"\b([1-9])(\d{2})\s*(am|pm)\b", re.IGNORECASE, )
-    COMPACT_24H_TIME_PATTERN = re.compile( r"\b([01]\d|2[0-3])([0-5]\d)\b" )
+    COMPACT_12H_TIME_PATTERN = re.compile(
+        r"\b([1-9])(\d{2})\s*(am|pm)\b", re.IGNORECASE, )
+    COMPACT_24H_TIME_PATTERN = re.compile(r"\b([01]\d|2[0-3])([0-5]\d)\b")
 
     def _clean_for_dateparser(self, text: str) -> str:
         return self.COMMAND_WORD_PATTERN.sub("", text)
-
 
     def extract(self, transcript: str) -> SchedulingIntent:
         normalized = self._normalize_times(transcript)
         cleaned = self._clean_for_dateparser(normalized)
         action = "schedule" if "schedule" in transcript.lower() else "unknown"
 
-
         person_match = self.PERSON_PATTERN.search(transcript)
-        person = person_match.group(1) if person_match else None
+        person = person_match.group(1) if person_match else "John Doe"
 
-        matches = search_dates(cleaned, settings={"PREFER_DATES_FROM": "future"}) or []
+        matches = search_dates(
+            cleaned, settings={"PREFER_DATES_FROM": "future"}) or []
 
         candidates = [(text, dt.isoformat()) for text, dt in matches]
 
@@ -81,7 +79,7 @@ class IntentExtractor:
             text,
         )
 
-        # 530 pm / 544 pm -> 5:30 pm / 5:44 pm 
+        # 530 pm / 544 pm -> 5:30 pm / 5:44 pm
         text = self.COMPACT_12H_TIME_PATTERN.sub(
             r"\1:\2 \3",
             text,
@@ -94,7 +92,6 @@ class IntentExtractor:
         )
 
         return text
-
 
     def _resolve_best_matches(self, matches):
         """
@@ -116,7 +113,6 @@ class IntentExtractor:
 
         date_text, date_dt = matches[-1]
         date_component = date_dt.date()
-
 
         # Time comes from the last phrase that explicitly stated a clock time
 

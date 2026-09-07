@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:17.2-alpine3.20
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: scheduler_user
+      POSTGRES_PASSWORD: justpassword
+      POSTGRES_DB: scheduler_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

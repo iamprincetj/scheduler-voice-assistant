@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from src.models.base import Event
 from src.calendar_service import create_calendar_event
 
+
 class Notifier(ABC):
     """
     Base Interface for delivering a reminder. Swap ConsoleNotifier for an email, SMS, or push notification implementation later -
@@ -19,7 +20,8 @@ class ConsoleNotifier(Notifier):
     """
 
     def notify(self, event: Event) -> None:
-        print(f"\n 🔔REMINDER: Meeting with {event.get('person', '')} at {event.get('when')}\n")
+        print(
+            f"\n 🔔REMINDER: Meeting with {event.get('person', '')} at {event.get('when')}\n")
 
 
 class GoogleCalendarNotifier(Notifier):
@@ -28,7 +30,9 @@ class GoogleCalendarNotifier(Notifier):
     """
 
     def notify(self, event: Event):
-        
-        created_event = create_calendar_event(event.person, event.when)
-        
+        person = event.get("person", '')
+        when = event.get("when", '')
+
+        created_event = create_calendar_event(person, when)
+
         return created_event

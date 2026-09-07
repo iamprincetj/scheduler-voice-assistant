@@ -183,3 +183,5 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/python
 
 events.json
+.env
+data/events.json
