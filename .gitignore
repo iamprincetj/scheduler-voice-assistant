@@ -185,3 +185,4 @@ pyrightconfig.json
 events.json
 .env
 data/events.json
+data
