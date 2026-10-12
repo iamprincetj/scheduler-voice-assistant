@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
-from .calendar_backend import CalendarBackend
-from .notifier import Notifier, GoogleCalendarNotifier
+from ..calendar_backend import CalendarBackend
+from ..notifier import Notifier, GoogleCalendarNotifier
 
 
 class ReminderService:

@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from src.calendar_service import create_calendar_event
+from src.services.calendar_service import create_calendar_event
 
 event = create_calendar_event(
     person="Daniel",

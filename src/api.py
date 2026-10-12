@@ -6,17 +6,18 @@ from pathlib import Path
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import JSONResponse
 
-from src.schemas import TranscriptionResponse
+from src.models.schemas import TranscriptionResponse
 from src.stt_engine import WhisperSTT
 
 
 logger = logging.getLogger("stt_api")
 
 # Load the model ONCE at startup, not per-request.
-# Whisper model loading is expensive (reads weights into memory/GPU) - 
+# Whisper model loading is expensive (reads weights into memory/GPU) -
 # doing this insode a route handler would reload it on every single call.
 
-_MODEL_SIZE = "base" # use "base" for a smaller model size or "small" for slightly large model size
+# use "base" for a smaller model size or "small" for slightly large model size
+_MODEL_SIZE = "base"
 _engine = WhisperSTT(model_size=_MODEL_SIZE)
 
 # Whisper (via ffmpeg) can actually handle most audio containers regardless
@@ -33,6 +34,7 @@ app = FastAPI(
     description="Internal miscroservice wrapping OpenAI Whisper for speech-to-text.",
     version="1.0.0"
 )
+
 
 @app.get("/health")
 def health_check() -> dict:
@@ -52,7 +54,7 @@ def health_check() -> dict:
         },
     }
 )
-async def transcribe_audio(file: UploadFile= File(...)) -> TranscriptionResponse:
+async def transcribe_audio(file: UploadFile = File(...)) -> TranscriptionResponse:
     """
     Accepts an uploaded audio file and returns it transcript.
 
@@ -99,7 +101,7 @@ async def transcribe_audio(file: UploadFile= File(...)) -> TranscriptionResponse
         )
 
     except HTTPException:
-        raise # re-raise as-is, don't wrap our own 400s as 500s
+        raise  # re-raise as-is, don't wrap our own 400s as 500s
 
     except Exception as exc:
         logger.exception("Transcription fialed")
@@ -124,7 +126,8 @@ def _estimate_confidence(whisper_result: dict) -> float | None:
     if not segments:
         return None
 
-    avg_logprobs = [seg.get("avg_logprob") for seg in segments if seg.get("avg_logprob") is not None]
+    avg_logprobs = [seg.get("avg_logprob")
+                    for seg in segments if seg.get("avg_logprob") is not None]
 
     if not avg_logprobs:
         return None
