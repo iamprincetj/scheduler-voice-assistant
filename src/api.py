@@ -19,6 +19,7 @@ from src.models.base import User
 from src.exceptions.base import GlobalError, global_error_handler
 
 from src.stt_engine import WhisperSTT
+from ui.app import start_schedule
 
 
 logger = logging.getLogger("stt_api")
@@ -60,6 +61,9 @@ app = FastAPI(
 )
 
 app.add_exception_handler(GlobalError, global_error_handler)
+
+
+start_schedule()
 
 
 @app.get("/")
@@ -187,7 +191,6 @@ def register(payload: UserRegister, session: Session = Depends(get_session)):
             access_token=access_token
         )
     except Exception as e:
-        print(e)
         raise GlobalError(status_code=500, message=f"Internal Error: {e}")
 
 

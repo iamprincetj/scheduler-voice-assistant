@@ -1,3 +1,4 @@
+# Example usage of the whisper model
 import whisper
 
 model = whisper.load_model("base")
