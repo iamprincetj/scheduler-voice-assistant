@@ -1,3 +1,5 @@
+# Optional test for the transcriber
+
 import whisper
 
 model = whisper.load_model("base")
