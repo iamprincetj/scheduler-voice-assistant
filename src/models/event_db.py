@@ -3,7 +3,6 @@ from typing import Optional
 
 from sqlmodel import SQLModel, Field
 
-
 class EventDB(SQLModel, table=True):
     """SQL representation of a booked event, used once a user's local
     quota is exceeded. Mirrors the fields in models/event.py's Event
