@@ -2,10 +2,24 @@
 
 A voice assistant for scheduling your daily life and work.
 
+Turn a thought into a plan, before it slips away.
+
 # PIPELINE
 
 ```
-audio file → [STT Layer] → text → [NLU Layer] → structured intent → [Action Layer] → booked event
+                        Audio File
+                            ⬇️
+                        [STT Layer]
+                            ⬇️
+                        Text
+                            ⬇️
+                        [NLU Layer]
+                            ⬇️
+                        Structured Intent
+                            ⬇️
+                        [Action Layer]
+                            ⬇️
+                        Booked Event
 ```
 
 - STT Layer — only knows "audio in, text out." Built behind an abstract STTEngine interface. This is the layer where you'll swap in Sahara for the real hackathon, and where your benchmark step will plug in multiple models interchangeably.
