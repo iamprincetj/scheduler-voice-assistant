@@ -1,6 +1,6 @@
 .venv
 test.wav
-__pycache__
+__pycache__/*
 
 credentials.json
 token.json

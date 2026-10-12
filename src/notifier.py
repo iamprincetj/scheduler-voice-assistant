@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from src.models.base import Event
-from src.calendar_service import create_calendar_event
+from src.services.calendar_service import create_calendar_event
 
 
 class Notifier(ABC):

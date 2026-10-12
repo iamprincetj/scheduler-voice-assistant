@@ -1,19 +1,16 @@
+from src.services.reminder_service import ReminderService
+from src.notifier import ConsoleNotifier, GoogleCalendarNotifier
+from src.pipeline import SchedulerPipeline
+from src.calendar_backend import LocalJSONCalendar
+from src.nlu_extractor import IntentExtractor
+from src.stt_engine import WhisperSTT
+import gradio as gr
+import json
 import sys
 from pathlib import Path
 from apscheduler.schedulers.background import BackgroundScheduler
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-
-import json
-import gradio as gr
-
-from src.stt_engine import WhisperSTT
-from src.nlu_extractor import IntentExtractor
-from src.calendar_backend import LocalJSONCalendar
-from src.pipeline import SchedulerPipeline
-
-from src.notifier import ConsoleNotifier, GoogleCalendarNotifier
-from src.reminder_service import ReminderService
 
 
 # Load the pipeline ONCE at startup - not per request - since loading
@@ -31,20 +28,24 @@ reminder_service = ReminderService(
     lookahead_minutes=15,
 )
 
+
 def start_schedule():
     scheduler = BackgroundScheduler()
     scheduler.add_job(reminder_service.check_and_notify, "interval", minutes=1)
     scheduler.start()
     print("Scheduler started successfully")
 
+
 start_schedule()
+
 
 def load_events_table():
     events = json.loads(pipeline.calendar.storage_path.read_text())
 
     return [
         [
-            e.get("person"), e.get("when"),e.get("raw_transcript"), e.get("reminded"),e.get("booked_at")
+            e.get("person"), e.get("when"), e.get(
+                "raw_transcript"), e.get("reminded"), e.get("booked_at")
         ] for e in reversed(events)
     ]
 
@@ -64,7 +65,6 @@ def handle_booking(audio_path):
     confirmation_text = f"✅ Booked: {confirmation}"
 
     return result["transcript"], summary, confirmation_text, load_events_table()
-
 
 
 with gr.Blocks(title="AI Scheduler Assistant") as demo:
@@ -87,7 +87,7 @@ with gr.Blocks(title="AI Scheduler Assistant") as demo:
 
     gr.Markdown("### 📋 Booked Events")
     events_table = gr.Dataframe(
-        headers=["Person", "When", "Transcript", "Reminded","Booked At"],
+        headers=["Person", "When", "Transcript", "Reminded", "Booked At"],
         value=load_events_table(),
         interactive=False,
     )
@@ -95,7 +95,8 @@ with gr.Blocks(title="AI Scheduler Assistant") as demo:
     book_btn.click(
         fn=handle_booking,
         inputs=[audio_input],
-        outputs=[transcript_output, summary_output, confirmation_output, events_table],
+        outputs=[transcript_output, summary_output,
+                 confirmation_output, events_table],
     )
 
 if __name__ == "__main__":
