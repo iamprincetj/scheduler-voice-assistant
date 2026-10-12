@@ -21,8 +21,6 @@ class ReminderService:
 
         window_end = now + timedelta(minutes=self.lookahead_minutes)
 
-        print(f"{now} -------- {window_end}")
-
         for event in self.calendar.get_all_events():
             if event.get("reminded"):
                 continue
@@ -34,5 +32,4 @@ class ReminderService:
 
             when_dt = datetime.fromisoformat(when_str)
             if now <= when_dt <= window_end:
-                print(self.notifier.notify(event))
                 self.calendar.mark_reminded(event['id'])
